@@ -29,12 +29,19 @@
     color: white;
     text-shadow: 0 0 4px gray;
 
+    opacity: 0.75;
+    filter:alpha(opacity=75);
+
     transition-property: all;
-    -moz-transition-property: all;
-    -webkit-transition-property: all;
-    -o-transition-property: all;
+    transition-duration: 1s;
+    
 
     cursor: pointer;
+  }
+  
+  .content-category:hover{
+    opacity: 1;
+    filter: alpha(opacity=100);
   }
 
   .content-category .card-image {
@@ -72,9 +79,6 @@
 
   .content-category.as-title {
     float: none;
-  }
-  .content-category.as-title .card-image img {
-    opacity: 0.75;
   }
   .content-category.as-title .card-title {
     font-size: 2.5rem;

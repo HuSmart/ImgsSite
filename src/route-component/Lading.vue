@@ -11,32 +11,33 @@
     import LandingView from '../component/LandingView.vue'
     import LandingContent from '../component/Content.vue'
 
+    import Config from '../model/Config.js'
+    import Category from '../model/Categories.js'
+
     export default {
         name: 'LandingPage',
         data(){ 
             return { 
-                config: {
-                    description: 'description',
-                    title: 'title',
-                    background: '../../assets/img/loading-bg.jpg'
-                },
-                categories: [
-                    {
-                        title: 'categoryTitle',
-                        cover: '',
-                        subtitle: 'subtitle'
-                    },
-                    {
-                        title: 'categoryTitle1',
-                        cover: '',
-                        subtitle: 'subtitle2'
-                    }
-                ]
+                config: {},
+                categories: []
             } 
         },
         components: {
             LandingView,
             LandingContent
+        },
+        mounted() {
+            this.$nextTick(function () {
+            // 保证 this.$el 已经插入文档
+                Promise.all([
+                    Config.load(),
+                    Category.load()
+                ])
+                .then(([ config, category ]) => {
+                    this.config = config
+                    this.categories = category
+                })
+            })
         }
     }
 </script>
