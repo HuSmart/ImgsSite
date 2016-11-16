@@ -1,5 +1,3 @@
- export default 'This is a export test'
+import Config from './script'
 
- export function modo(){
-     document.write('modo')
- }
+console.log(Config.load())
