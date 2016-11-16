@@ -1,8 +1,8 @@
 <template>
   <div id="content">
     <div id="content-categories">
-      <router-link :to=" '/category/' + category.title " v-for="category in categories">
-        <category-item :category="category"></category-item>
+      <router-link :to=" '/category/' + category.getCacheData().name " v-for="category in categories">
+        <category-item :category="category.getCacheData()"></category-item>
       </router-link>
     </div>
   </div>
