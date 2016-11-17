@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import App from '../component/App.vue'
 import LandingRoute from '../route-component/Lading.vue'
 import Categories from '../route-component/Categories.vue'
+import Album from '../route-component/Album.vue'
 
 Vue.use(VueRouter)
 
@@ -14,8 +15,11 @@ const router = new VueRouter({
             component: LandingRoute
         },
         {
-            path: '/category/:category',
+            path: '/category/:name',
             component: Categories
+        },{
+            path: '/album/:key',
+            component: Album
         }
     ]
 })
