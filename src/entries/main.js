@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import App from '../component/App.vue'
 import LandingRoute from '../route-component/Lading.vue'
 import Categories from '../route-component/Categories.vue'
 import Album from '../route-component/Album.vue'

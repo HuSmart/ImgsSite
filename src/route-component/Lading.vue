@@ -27,6 +27,7 @@
             LandingContent
         },
         mounted() {
+            Config.update()
             this.$nextTick(function () {
             // 保证 this.$el 已经插入文档
                 Promise.all([
