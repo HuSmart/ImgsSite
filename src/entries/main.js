@@ -1,3 +1,4 @@
+// 用户主页入口
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 

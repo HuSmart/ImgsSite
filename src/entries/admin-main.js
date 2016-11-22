@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 
 import Dashboard from '../route-component/admin/dashboard.vue'
 import Categories from '../route-component/admin/admin-categories.vue'
+import Category from '../route-component/admin/admin-category.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,13 @@ const router = new VueRouter({
             components: {
                 'nva': Dashboard,
                 'content': Categories
+            }
+        },
+        {
+            path: '/category/:name',
+            components: {
+                'nva': Dashboard,
+                'content': Category
             }
         }
     ]
