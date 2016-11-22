@@ -27,7 +27,6 @@
                     .then(() => Album.fetch(this.$route.params.key))
                     .then(res => res.getCacheData())
                     .then(album => {
-                        console.log(album)
                         this.album = album
                     })
             })

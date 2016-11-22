@@ -1,20 +1,20 @@
 <template>
     <div id="dashboard">
         <div class="page-header">
-            <h1>Filmy</h1>
+            <h1>管理你的应用</h1>
         </div>
         <div class="row">
             <div class="col-md-4 dashboard-number">
                 <router-link to="/category" tag="h1">{{numbers.categories}}</router-link>
-                <p>{{'number of categories'}}</p>
+                <p>{{'分类'}}</p>
             </div>
             <div class="col-md-4 dashboard-number">
                 <router-link to="/album" tag="h1">{{numbers.albums}}</router-link>
-                <p>{{'number of albums'}}</p>
+                <p>{{'相册'}}</p>
             </div>
             <div class="col-md-4 dashboard-number">
                 <h1>{{numbers.photos}}</h1>
-                <p>{{'number of photos'}}</p>
+                <p>{{'图片'}}</p>
             </div>
         </div>
     </div>
@@ -30,8 +30,7 @@
                     categories:0,
                     albums:0,
                     photos:0
-                },
-                categories:[]
+                }
             }
         },
         mounted(){
@@ -54,6 +53,7 @@
         text-align: center;
         padding: 5px 0;
         border-right: 1px solid #CCC;
+        cursor: pointer;
     }
     
     .dashboard-number:last-child {
