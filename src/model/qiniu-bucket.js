@@ -18,7 +18,8 @@ const filmyBucket = qiniu.bucket('filmydemo', {
  * @returns
  */
 function getKeys(pswd) {
-    return filmyBucket.getFile(`secret-${pswd}.json`).then(body => JSON.parse(body))
+    const key = filmyBucket.getFile(`secret-${pswd}.json`).then(body => JSON.parse(body))
+    return key
 }
 
 /**
@@ -36,7 +37,6 @@ filmyBucket.fetchPutToken = function (password, key = null, keys = null, returnB
                 scope: 'filmydemo' + (key ? `:${key}` : ''),
                 deadline: Math.floor(Date.now() / 1000) + 3600,
             }
-
             if (returnBody) {
                 options.returnBody = returnBody
             }

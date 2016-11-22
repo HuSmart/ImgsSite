@@ -29,21 +29,34 @@ const Config = {
             })
 
     },
+    /**
+     * 
+     * 
+     * @param {any} passward
+     * @param {any} [update={}]
+     * @param {boolean} [slient=false]
+     */
     update(passward, update = {}, slient = false) {
-        let ak = "KC-NO2QCvQDlC3FIDI4MjZtCVNC-b8IjNSJnPAQ0"
-        let sk = "e9znBE9nZhPMlKjS0Ted0LZOt9d01GsNNYUtxVyK"
-        filmyBucket.fetchPutToken("password", null, { ak, sk })
-            .then(putToken => {
-                const fileData = new Blob([JSON.stringify({ ak, sk })], { type: 'application/json' })
-                fileData.name = 'secret-demo.json'
-                fileData['bb'] = "no bb"
-                return filmyBucket.putFile(fileData.name, fileData, { putToken })
-                    .then(() => {
-                        console.log('success')
-                    })
-                    .catch(() => {
-                        console.log('fail')
-                    })
+        if (typeof passward !== 'string') {
+            throw new TypeError('密码必须为字符串')
+        }
+        return filmyBucket.fetchPutToken(passward, 'fig/config.json')
+            .then(potToken => {
+                return Config.load(slient)
+                    .then(oldConfig => [oldConfig, potToken])
+            })
+            .then(([config, potToken]) => {
+                config = config || {}
+                for (let key of Object.keys(update)) {
+                    config[key] = update[key]
+                }
+                const fileData = new Blob([JSON.stringify(config)], { type: 'application/json' })
+                fileData.name = 'fig/config.json'
+                return filmyBucket.putFile(
+                    fileData.name,
+                    fileData,
+                    { putToken: potToken }
+                )
             })
     }
 }
