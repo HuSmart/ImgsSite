@@ -48,7 +48,7 @@ filmyBucket.fetchPutToken = function (password, key = null, keys = null, returnB
             const token = `${keys.ak}:${encodeDigest}:${singture}`
 
             return token
-        })
+        })       
 }
 
 /**
