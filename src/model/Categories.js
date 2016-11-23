@@ -20,7 +20,7 @@ Category.load = function () {
                 ready = true
                 return categories
             } else {
-                return filmyBucket.getFile('fig/categories.json?v=0004')
+                return filmyBucket.getFile('fig/categories.json?v=0124')
                     .then(body => JSON.parse(body))
             }
         })
@@ -51,6 +51,22 @@ Category.loadIfNotInit = function () {
     } else {
         return Promise.resolve()
     }
+}
+
+Category.saveToCloud = (password) => {
+    if (typeof password !== 'string'){
+        throw new TypeError('Password must type of String ')
+    }
+    debugger
+    return filmyBucket.fetchPutToken(password,'fig/categories.json')
+        .then(putToken => {console.log(Category.dump())
+            return Category.dump().then(data => [data, putToken])
+        })
+        .then(([data, putToken]) => {
+            let file = new Blob([JSON.stringify(data)], {type:'application/json'})
+            file.name='fig/categories.json'
+            return filmyBucket.putFile(file.name,file,{putToken})
+        })
 }
 
 export default Category

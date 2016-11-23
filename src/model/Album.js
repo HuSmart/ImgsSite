@@ -72,3 +72,19 @@ Album.fetchByCategory = function (categoryName) {
             return a.getCacheData().created_at < b.getCacheData().created_at
         }))
 }
+
+Album.saveToCloud = (password) => {
+    if (typeof password !== 'string') {
+        throw new TypeError('Password must type of string ')
+    }
+    debugger
+    filmyBucket.fetchPutToken(password, 'fig/albums.json')
+        .then(putToken => {
+            return Album.dump().then(data => [data, putToken])
+        })
+        .then(([albums, putToken]) => {
+            let fileData = new Blob([JSON.stringify(albums)], { type: 'application/json' })
+            fileData.name = 'fig/albums.json'
+            return filmyBucket.putFile(fileData.name, fileData, { putToken })
+        })
+}
