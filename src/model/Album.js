@@ -31,7 +31,7 @@ Album.load = function () {
                 ready = true
                 return albums
             } else {
-                return filmyBucket.getFile('fig/albums.json?v=0004')
+                return filmyBucket.getFile('fig/albums.json')
                     .then(albums => JSON.parse(albums))
             }
         })
@@ -77,8 +77,7 @@ Album.saveToCloud = (password) => {
     if (typeof password !== 'string') {
         throw new TypeError('Password must type of string ')
     }
-    debugger
-    filmyBucket.fetchPutToken(password, 'fig/albums.json')
+    return filmyBucket.fetchPutToken(password, 'fig/albums.json')
         .then(putToken => {
             return Album.dump().then(data => [data, putToken])
         })

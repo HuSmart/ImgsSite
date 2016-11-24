@@ -5,10 +5,10 @@ import VueRouter from 'vue-router'
 import Dashboard from '../route-component/admin/dashboard.vue'
 import Categories from '../route-component/admin/admin-categories.vue'
 import Category from '../route-component/admin/admin-category.vue'
+import Albums from '../route-component/admin/admin-albums.vue'
+import Album from '../route-component/admin/admin-album.vue'
 
 Vue.use(VueRouter)
-
-let album = { template: '<p>album</p>' }
 
 const router = new VueRouter({
     routes: [
@@ -21,16 +21,21 @@ const router = new VueRouter({
             path: '/album',
             components: {
                 'nva': Dashboard,
-                'content': album
+                'content': Albums
             }
         },{
+            path: '/album/:category',
+            components: {
+                'nva': Dashboard,
+                'content': Album
+            }
+        }, {
             path: '/category',
             components: {
                 'nva': Dashboard,
                 'content': Categories
             }
-        },
-        {
+        }, {
             path: '/category/:name',
             components: {
                 'nva': Dashboard,
