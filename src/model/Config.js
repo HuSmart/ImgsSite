@@ -11,7 +11,7 @@ const Config = {
                 if (exists) {
                     return store.hgetall(STORE_KEY)
                 } else {
-                    return filmyBucket.getFile('fig/config.json?v=0002')
+                    return filmyBucket.getFile('fig/config.json')
                         .then(body => JSON.parse(body))
                         .then(data => {
                             try {

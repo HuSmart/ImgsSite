@@ -33,22 +33,22 @@
             }
         },
         mounted(){
-            Promise.all([
-                Category.loadIfNotInit().then(() => Category.dump()),
-                Album.loadIfNotInit().then(() => Album.dump())
-            ]).then(([categories, albums]) => {
-                for (let category of categories){
-                    category.count = albums.filter(album => category.name === album.category).length
-                }
-                this.categories= categories
+            this.$nextTick(function(){
+                Promise.all([
+                    Category.loadIfNotInit().then(() => Category.dump()),
+                    Album.loadIfNotInit().then(() => Album.dump())
+                ]).then(([categories, albums]) => {
+                    for (let category of categories){
+                        category.count = albums.filter(album => category.name === album.category).length
+                    }
+                    this.categories= categories
+                })
             })
         }
     }
 </script>
 <style>
-    .row {
-        margin-right: 0px
-    }
+    
     
     .category {
         width: 49%;
@@ -75,5 +75,9 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+    .row {
+        margin-right: 0px;
+        margin-left: 0px;
     }
 </style>

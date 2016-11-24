@@ -20,7 +20,7 @@ Category.load = function () {
                 ready = true
                 return categories
             } else {
-                return filmyBucket.getFile('fig/categories.json?v=0124')
+                return filmyBucket.getFile('fig/categories.json')
                     .then(body => JSON.parse(body))
             }
         })
@@ -57,9 +57,8 @@ Category.saveToCloud = (password) => {
     if (typeof password !== 'string'){
         throw new TypeError('Password must type of String ')
     }
-    debugger
     return filmyBucket.fetchPutToken(password,'fig/categories.json')
-        .then(putToken => {console.log(Category.dump())
+        .then(putToken => {
             return Category.dump().then(data => [data, putToken])
         })
         .then(([data, putToken]) => {

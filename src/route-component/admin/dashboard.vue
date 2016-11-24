@@ -34,16 +34,18 @@
             }
         },
         mounted(){
-            Promise.all([
-                Category.loadIfNotInit()
-                    .then(() => Category.dump()),
-                Album.loadIfNotInit()
-                    .then(() => Album.dump())
-            ])
-            .then( ([categories, albums]) =>   {
-                this.numbers.categories = categories.length
-                this.numbers.albums = albums.length
-                this.numbers.photos = albums.map(album => album.photos.length).reduce( (a, b) => a + b)
+            this.$nextTick(function(){
+                Promise.all([
+                    Category.loadIfNotInit()
+                        .then(() => Category.dump()),
+                    Album.loadIfNotInit()
+                        .then(() => Album.dump())
+                ])
+                .then( ([categories, albums]) =>   {
+                    this.numbers.categories = categories.length
+                    this.numbers.albums = albums.length
+                    this.numbers.photos = albums.map(album => album.photos.length).reduce( (a, b) => a + b)
+                })
             })
         }
     }

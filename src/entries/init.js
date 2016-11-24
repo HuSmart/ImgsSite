@@ -86,7 +86,7 @@ new Vue({
 
                     SimpleModel(
                         '初始化完成',
-                        '你的应用已经可以使用'
+                        '你的应用已经可以使用',
                         `
                             <a href=${url} class="btn btn-primary" role="button">前往首页</a>
                             <a href=${adminUrl} class="btn" role="button">前往管理员工具</a>

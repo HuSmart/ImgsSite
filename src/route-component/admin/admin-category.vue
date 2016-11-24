@@ -27,7 +27,7 @@
         </form>
         <div class="form-group">
             <button class="btn btn-primary" ref="submit" @click="submit">完成</button>
-            <button class="btn" v-if="category._key" @click="">删除</button>
+            <button class="btn" v-if="category._key" @click="deleteCategory">删除</button>
         </div>
     </div>
 </template>
@@ -119,15 +119,15 @@
                             .catch(() => reject(console.log('Admin Password Error')))
                     })
                 })
-                // ===========结束处理cover================
                 .then(([coverUrl, password]) => {
+                    // ====新增的分类进行本地存储======
                     if(this.newCategory){
                         return new Promise(resolve => {
                             this.model = new Category(this.category)
                             this.model.once('ready', () => resolve(password))
                         })
+                        // =====对修改name的分类下 所属的相册进行name同步======
                     } else if (this.$route.params.name !== this.category.name){
-                        debugger
                         return Album.search('category', this.$route.params.name)
                             .then(albums => {
                                 return Promise.all(albums.map(album => album.set('category', this.category.name)))
@@ -135,19 +135,52 @@
                                     .then(() => password)
                             })
                     } else 
-                        return resolve(password)
+                        return password
                 })
                 .then(password => {
+                    // ====同步用户输入的值到本地存储===========
                     return Promise.all(['title', 'name', 'cover', 'subtitle'].map(key => this.model.set(key,this.category[key])))
                         .then(() => password)
                 })
+                // ========上传到服务器========
                 .then(password => Category.saveToCloud(password))
                 .then(() => {
                     swal({title: '编辑成功', type: 'success'})
+                    this.$router.push('/category/')
                 })
                 .catch(() => {
                     swal({title: '保存出现错误', type:'error'})
                 })
+            },
+            deleteCategory(){
+                swalp({
+                    title: '是否确定要删除该分类',
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    closeOnConfirm: false
+                })
+                .then(() => swalp({
+                        title: '请输入管理员密码', 
+                        type: 'input', 
+                        inputType: 'password', 
+                        showCancelButton: true, 
+                        closeOnConfirm: false,
+                        showLoaderOnConfirm: true 
+                    }))
+                .then( password => this.model.remove().then(() => password))
+                .then(password => Category.saveToCloud(password))
+                .then(() => {
+                    swal({
+                        title:'删除成功',
+                        type: 'success'
+                    })
+                    this.$router.push('/category/')
+                })
+                .cath(() => swal({
+                    title:'删除失败',
+                    type: 'error'
+                }))
             }
         }
     }
