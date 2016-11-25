@@ -2,6 +2,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import 'bootstrap'
+import 'sweetalert'
+
 import Dashboard from '../route-component/admin/dashboard.vue'
 import Categories from '../route-component/admin/admin-categories.vue'
 import Category from '../route-component/admin/admin-category.vue'
@@ -24,7 +27,7 @@ const router = new VueRouter({
                 'content': Albums
             }
         },{
-            path: '/album/:category',
+            path: '/album/:albumKey',
             components: {
                 'nva': Dashboard,
                 'content': Album

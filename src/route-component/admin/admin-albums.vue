@@ -8,7 +8,7 @@
             </ul>
             <form action="" class="form-inline pull-right">
                 <div class="form-group">
-                    <router-link tag="button" class="btn btn-primary" to="/album/">新增</router-link>
+                    <router-link tag="button" class="btn btn-primary" to="/album/new">新增</router-link>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="输入相册名称">
@@ -17,7 +17,7 @@
             </form>
         </div>
         <div class="row">
-            <router-link v-for="album of albums" class="img-rounded album" :to="{ path: `/albums/${album._key}` }" teg="div">
+            <router-link v-for="album of albums" class="img-rounded album" :to="{ path: `/album/${album._key}` }" teg="div">
                 <h1 class="album-title">{{album.title}}(照片数量){{album.count}}</h1>
                 <img :data-src="album.photos[0]" alt="album.title" class="lazyload">
             </router-link>

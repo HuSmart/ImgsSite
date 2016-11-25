@@ -34,7 +34,7 @@
 <script>
     import Category from '../../model/Categories.js'
     import SimpleModel from '../../lib/simple-model'
-    import 'sweetalert'
+    
     import filmyBucket from '../../model/qiniu-bucket.js'
     import Album from '../../model/Album.js'
 
@@ -121,6 +121,7 @@
                 })
                 .then(([coverUrl, password]) => {
                     // ====新增的分类进行本地存储======
+                    this.category.cover = coverUrl
                     if(this.newCategory){
                         return new Promise(resolve => {
                             this.model = new Category(this.category)

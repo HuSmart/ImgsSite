@@ -18,7 +18,7 @@
 
 <style scoped>
   .content-category {
-    height: 98vh;
+    height: 58vh;
     width: 42.55vh;
     margin-bottom: 10px;
     display: inline-block;

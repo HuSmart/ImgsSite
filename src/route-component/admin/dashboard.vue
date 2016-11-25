@@ -22,7 +22,7 @@
 <script>
     import Category from '../../model/Categories.js'
     import Album from '../../model/Album.js'
-
+    
     export default {
         data(){
             return {
