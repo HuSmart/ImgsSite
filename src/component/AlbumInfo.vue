@@ -16,6 +16,7 @@
         width: 100%;
         padding: .5rem .8rem;
         background: white;
+        border-left: 5px solid #333;
     }
     
     @media only screen and (min-width: 500px) {

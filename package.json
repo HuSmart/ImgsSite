@@ -6,6 +6,7 @@
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
+    "bootstrap": "^3.3.7",
     "crypto-browserify": "^3.11.0",
     "crypto-js": "^3.1.8",
     "css-loader": "^0.25.0",
@@ -15,6 +16,7 @@
     "min": "^0.1.16",
     "min-model": "^0.1.11",
     "qiniu.js": "^0.1.1",
+    "sweetalert": "^1.1.3",
     "vue": "^2.0.5",
     "vue-loader": "^9.8.1",
     "vue-router": "^2.0.1",
@@ -22,8 +24,12 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack"
+    "dev": "webpack-dev-server --port 8080 --inline --hot ",
+    "build": "webpack"
   },
   "author": "amdin",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "webpack-dev-server": "^1.16.2"
+  }
 }

@@ -1,11 +1,13 @@
 module.exports = {
   entry: {
-    web: './src/entries/main.js'
-    // test: './test/enter.js',
+    web: './src/entries/main.js',
+    init: './src/entries/init.js',
+    admin: './src/entries/admin-main.js'
   },
   output: {
     // path: __dirname + '/test/build/',
     path: __dirname + '/build/',
+    publicPath: '/dev/',
     filename: '[name]-build.js'
   },
   module: {

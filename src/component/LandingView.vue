@@ -6,7 +6,7 @@
             <h1 id="landing-title" v-if="config.title">{{config.title}}</h1>
             <p id="landing-desc">{{ config.description || '' }}</p>
         </div>
-        <a class="scroll-down icon-arrow-left"></a>
+        <a class="scroll-down icon-arrow-left" @click="scrollTo"></a>
     </div>
 </template>
 <script>
@@ -25,6 +25,13 @@
             // 过滤器:处理网站简介中的换行符
             cr2br(str){
                 return str.replace(/\n/g,'<br />')
+            }
+        },
+        methods:{
+            scrollTo(){
+              $('html,body').animate({
+                scrollTop: $('#landing-content').offset().top
+              },800)
             }
         }
     }
