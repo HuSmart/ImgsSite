@@ -1,5 +1,9 @@
 <template>
     <div id="album">
+        <ol class="breadcrumb">
+            <li><router-link to="/">HOME</router-link></li>
+            <li class="active"><router-link :to="{ path: `/category/${this.album.category}` }">Back</router-link></li>
+        </ol>
         <h1 id="album-title">{{album.title}}</h1>
         <album-info :content="album.content"></album-info>
         <photo-list :photos="album.photos"></photo-list>

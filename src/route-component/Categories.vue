@@ -1,9 +1,11 @@
 <template>
     <div id="category">
+        <ol class="breadcrumb">
+            <li class="active"><router-link to="/" class="back back-white"><span class="icon-arrow-left"></span> <span>HOME</span></router-link></li>
+        </ol>
         <category-item :category="category" :asTitle="true"></category-item>
         <albums-list :albums="albums"></albums-list>
     </div>
-  </div>
 
 </template>
 
@@ -45,3 +47,8 @@
         }
     }
 </script>
+<style>
+    .categoryFooter{
+        overflow: auto 
+    }
+</style>

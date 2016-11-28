@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import LandingRoute from '../route-component/Lading.vue'
 import Categories from '../route-component/Categories.vue'
 import Album from '../route-component/Album.vue'
+import Search from '../route-component/Search.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,9 @@ const router = new VueRouter({
         },{
             path: '/album/:key',
             component: Album
+        },{
+            path: '/search/:query',
+            component: Search
         }
     ]
 })
