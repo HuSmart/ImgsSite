@@ -10,6 +10,7 @@ import Categories from '../route-component/admin/admin-categories.vue'
 import Category from '../route-component/admin/admin-category.vue'
 import Albums from '../route-component/admin/admin-albums.vue'
 import Album from '../route-component/admin/admin-album.vue'
+import Setting from '../route-component/admin/admin-setting.vue'
 
 Vue.use(VueRouter)
 
@@ -43,6 +44,12 @@ const router = new VueRouter({
             components: {
                 'nva': Dashboard,
                 'content': Category
+            }
+        },{
+            path: '/setting',
+            components: {
+                'nva': Dashboard,
+                'content': Setting
             }
         }
     ]
