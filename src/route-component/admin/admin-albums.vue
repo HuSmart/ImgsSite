@@ -8,18 +8,18 @@
             </ul>
             <form action="" class="form-inline pull-right">
                 <div class="form-group">
-                    <router-link tag="button" class="btn btn-primary" to="/album/new">新增</router-link>
+                    <router-link class="btn btn-primary" to="/album/new">新增</router-link>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="输入相册名称">
-                    <button class="btn">搜索</button>
+                    <input type="text" class="form-control" v-model.lazy="query" placeholder="输入相册名称">
+                    <button class="btn"  @click="searchAlbum">搜索</button>
                 </div>
             </form>
         </div>
         <div class="row">
             <router-link v-for="album of albums" class="img-rounded album" :to="{ path: `/album/${album._key}` }" teg="div">
                 <h1 class="album-title">{{album.title}}(照片数量){{album.count}}</h1>
-                <img :data-src="album.photos[0]" alt="album.title" class="lazyload">
+                <img :src="album.photos[0]" alt="album.title">
             </router-link>
         </div>
     </div>
@@ -36,7 +36,8 @@
                 albums:[],
                 allAlbums: [],
                 categories: [],
-                choosCategory: true
+                choosCategory: true,
+                query: ''
             }
         },
         mounted(){
@@ -58,6 +59,14 @@
             showCategory(category){
                 if (!category) return this.albums = this.allAlbums
                 this.albums = this.allAlbums.filter(n => n.category === category.name)
+            },
+            searchAlbum(){
+                if (!this.query) return this.albums = this.allAlbums
+                this.albums = this.allAlbums.filter(album => {
+                    let albumTitle = album.title, albumContent = album.content
+                    let reg = new RegExp(`^\\S*${this.query}\\S*$`)
+                    return reg.test(albumTitle) || reg.test(albumContent)
+                })
             }
         }
     }

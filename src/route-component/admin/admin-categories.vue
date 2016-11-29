@@ -4,18 +4,18 @@
         <div class="row">
             <form action="" class="form-inline pull-right">
                 <div class="form-group">
-                    <router-link tag="button" class="btn btn-primary" to="/category/new">新建</router-link>
+                    <router-link  class="btn btn-primary" to="/category/new">新建</router-link>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control">
-                    <button class="btn">搜索</button>
+                    <input type="text" class="form-control" v-model.lazy="query" >
+                    <button class="btn" @click="search">搜索</button>
                 </div>
             </form>
         </div>
         <div class="row">
             <router-link class="category img-rounded" v-for="category of categories" tag="div" :to="'/category/' + category.name">
                 <h1 class="category-title">{{category.title}}(相册数:{{category.count}})</h1>
-                <img :data-src="category.cover" :alt="category.title" class="lazyload">
+                <img :src="category.cover" :alt="category.title" >
             </router-link>
         </div>
     </div>
@@ -29,7 +29,9 @@
         name: 'admin-category',
         data(){
             return {
-                categories:[]
+                originalCategories: [],
+                categories:[],
+                query: ''
             }
         },
         mounted(){
@@ -42,8 +44,23 @@
                         category.count = albums.filter(album => category.name === album.category).length
                     }
                     this.categories= categories
+                    this.originalCategories = categories
                 })
             })
+        },
+        methods: {
+            search(){
+                if(!this.query){
+                    this.categories = this.originalCategories
+                    return
+                }
+                this.categories = this.originalCategories.filter(category => {
+                    let categoryName = category.name, 
+                        categoryTitle = category.title
+                    let reg = new RegExp(`^\\S*${this.query}\\S*$`)
+                    return reg.test(categoryName) || reg.test(categoryTitle)
+                })
+            }
         }
     }
 </script>
