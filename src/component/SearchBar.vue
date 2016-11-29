@@ -7,7 +7,7 @@
 </template>
 <script>
     export default {
-        props:['router', 'static', 'query', 'options','tj'],
+        props:['router', 'static', 'query', 'options'],
 
         data() {
             return {
@@ -20,7 +20,10 @@
                 if(!this.active){
                     this.active = true
                 }else{
-                    this.$router.push(`/search/${this.query}`)
+                    this.$router.push({
+                        path: `/search/${this.query}`,
+                        query: this.options || {}
+                    })
                 }
             },
             close(){

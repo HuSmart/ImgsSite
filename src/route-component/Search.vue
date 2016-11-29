@@ -3,7 +3,7 @@
         <search-bar :query="decodeURIComponent($route.params.query)" static="true"></search-bar>
         <div class="margin-space"></div>
 
-        <b class="title" v-if="!$route.query.category">分类</b>
+        <b class="title" v-if="!this.$route.query.category">分类</b>
         <Content :categories="categories" v-if="!$route.query.category"></Content>
         <span v-if="categories.length == 0 && !$route.query.category" id="empty">暂无分类</span>
         <b class="title">相册</b>
@@ -35,7 +35,7 @@
             search(query){
                 // debugger
                 let promises = []
-                if(!this.$route.query.categories){
+                if(!this.$route.query.category){
                     promises = [
                         Promise.all([
                             Category.search('title',query),
@@ -50,17 +50,26 @@
                         .then(([a, b]) => a.concat(b))
                         .catch(([a, b]) => a.concat(b))
                     ]
+                    Promise.all(promises)
+                        .then(([categories, albums]) => {
+                            if(albums){
+                                this.categories = categories
+                                this.albums = albums.map(n => n.getCacheData())
+                            }else{
+                                this.categories = categories
+                            }
+                        })
+                }else {
+                        Album.search('category', this.$route.query.category)
+                        .then(result => result.map(n => {
+                            let re = new RegExp(`^\\S*${query}\\S*$`)
+                            if(re.test(n.getCacheData().title) || re.test(n.getCacheData().content)){
+                                promises.push(n.getCacheData())
+                            }
+                        }))
+                        this.albums = promises
                 }
-
-                Promise.all(promises)
-                    .then(([categories, albums]) => {
-                        if(albums){
-                            this.categories = categories
-                            this.albums = albums.map(n => n.getCacheData())
-                        }else{
-                            this.categories = categories
-                        }
-                    })
+                
             }
         },
         mounted(){

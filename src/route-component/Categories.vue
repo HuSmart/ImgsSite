@@ -3,6 +3,7 @@
         <ol class="breadcrumb">
             <li class="active"><router-link to="/" class="back back-white"><span class="icon-arrow-left"></span> <span>HOME</span></router-link></li>
         </ol>
+        <search-bar :router="$route.router" :options="{ category: $route.params.name }"></search-bar>
         <category-item :category="category" :asTitle="true"></category-item>
         <albums-list :albums="albums"></albums-list>
     </div>
@@ -14,6 +15,7 @@
     import Category from '../model/Categories.js'
     import Album from '../model/Album.js'
     import AlbumsList from '../component/AlbumList.vue'
+    import SearchBar from '../component/SearchBar.vue'
 
     export default {
         name: 'CategoryPage',
@@ -27,7 +29,8 @@
         },
         components: {
             CategoryItem,
-            AlbumsList
+            AlbumsList,
+            SearchBar
         },
         mounted() {
             this.$nextTick(function () {
