@@ -31,7 +31,7 @@ Album.load = function () {
                 ready = true
                 return albums
             } else {
-                return filmyBucket.getFile('fig/albums.json')
+                return filmyBucket.getFile('fig/albums.json?v=123')
                     .then(albums => JSON.parse(albums))
             }
         })

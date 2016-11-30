@@ -41,8 +41,3 @@ store.saves = function (key, data) {
 store.hgetall = function (key) {
     return JSON.parse(localStorage.getItem(key))
 }
-
-store.search = function (key) {
-
-}
-

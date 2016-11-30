@@ -58,6 +58,9 @@ const Config = {
                     { putToken: potToken }
                 )
             })
+    },
+    setConfig(newConfig){
+        store.saves(STORE_KEY, newConfig)
     }
 }
 
