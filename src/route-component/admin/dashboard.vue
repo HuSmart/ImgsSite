@@ -1,7 +1,7 @@
 <template>
     <div id="dashboard">
         <div class="page-header">
-            <h1>管理你的应用</h1>
+            <router-link class="_head" to="/setting" tag="h1">管理你的应用</router-link>
         </div>
         <div class="row">
             <div class="col-md-4 dashboard-number">
@@ -47,6 +47,11 @@
                     this.numbers.photos = albums.map(album => album.photos.length).reduce( (a, b) => a + b)
                 })
             })
+        },
+        methods: {
+            setting(){
+                alert('asdf')
+            }
         }
     }
 </script>
@@ -68,5 +73,11 @@
     
     .dashboard-number p {
         font-size: 1.7rem;
+    }
+    ._head{
+        cursor: pointer;
+    }
+    ._head::hover{
+        color: cornflowerblue
     }
 </style>
