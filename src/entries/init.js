@@ -27,7 +27,7 @@ new Vue({
                 SimpleModel(
                     '提示',
                     '应用已经初始化，确定后跳转到主页面.',
-                    `<a href="${url}" class="btn btn-primary" role="button">确定</a>`
+                    `<a href="${url}/index.html" class="btn btn-primary" role="button">确定</a>`
                 )
                 this.$el.remove()
             })
@@ -82,13 +82,13 @@ new Vue({
                 })
                 .then(() => {
                     const url = `${location.protocol}//${location.host}`
-                    const adminUrl = url + '/admin'
+                    const adminUrl = url + '/admin/index.html'
 
                     SimpleModel(
                         '初始化完成',
                         '你的应用已经可以使用',
                         `
-                            <a href=${url} class="btn btn-primary" role="button">前往首页</a>
+                            <a href=${url}/index.html class="btn btn-primary" role="button">前往首页</a>
                             <a href=${adminUrl} class="btn" role="button">前往管理员工具</a>
                         `
                     )

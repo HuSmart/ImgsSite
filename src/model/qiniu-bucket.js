@@ -1,13 +1,14 @@
 import qiniu from 'qiniu.js'
 import crypto from 'crypto'
 
-var qiniuBucketUrl = 'http://ogmecb8k1.bkt.clouddn.com';
+var qiniuBucketUrl = null;
+const CLOUD_NAME = 'publicdemo'
 
 /**
  * location.protocol  获取Hppt Or Hppts
  * location.host    获取域名，如www.baidu.com
  */
-const filmyBucket = qiniu.bucket('filmydemo', {
+const filmyBucket = qiniu.bucket(CLOUD_NAME, {
     url: (qiniuBucketUrl ? qiniuBucketUrl : `${location.protocol}//${location.host}`)
 })
 
@@ -34,7 +35,7 @@ filmyBucket.fetchPutToken = function (password, key = null, keys = null, returnB
     return (keys ? Promise.resolve(keys) : getKeys(password))
         .then(keys => {
             const options = {
-                scope: 'filmydemo' + (key ? `:${key}` : ''),
+                scope: CLOUD_NAME + (key ? `:${key}` : ''),
                 deadline: Math.floor(Date.now() / 1000) + 3600,
             }
             if (returnBody) {

@@ -20,7 +20,7 @@ Category.load = function () {
                 ready = true
                 return categories
             } else {
-                return filmyBucket.getFile('fig/categories.json?v=123')
+                return filmyBucket.getFile('fig/categories.json')
                     .then(body => JSON.parse(body))
             }
         })
