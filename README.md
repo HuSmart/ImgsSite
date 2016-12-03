@@ -2,9 +2,9 @@
 
 ​	在学习ES6的过程中结合Vue2.0和Webpack等知识写了一个类似于“图库”的一个单页面应用DEMO。考虑到很多数据都是静态资源，所以决定将图片配置信息等数据存储在七牛云上。有访问请求或更新时从七牛上直接拉取，管理员对信息更改后更新七牛上的文件。（七牛有的文件都更新了好久了拉下来的还是未修改的版本太坑了！）
 
-​	[DEMO主页](http://ohlyett59.bkt.clouddn.com/index.html/)
+​	[DEMO主页](http://ohlyett59.bkt.clouddn.com/index.html)
 
-​	[管理员入口](http://ohlyett59.bkt.clouddn.com/admin/index.html/)
+​	[管理员入口](http://ohlyett59.bkt.clouddn.com/admin/index.html)
 
 ### 功能
 
@@ -13,7 +13,7 @@
 - 管理员对站点进行全方位的管理
 - 桌面和移动的页面自适应
 
-![cover](https://github.com/HuSmart/ImgsSite/tree/master/assets/img/README/cover.png)
+![cover](./assets/img/README/cover.png)
 
 ### 使用方法
 
